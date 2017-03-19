@@ -48,32 +48,32 @@ def repeatFasta(src, n):
     width = 60
     r = len(src)
     s = src + src + src[:n % r]
-    for j in xrange(n // width):
+    for j in range(n // width):
         i = j*width % r
-        print s[i:i+width]
+        print(s[i:i+width])
     if n % width:
-        print s[-(n % width):]
+        print(s[-(n % width):])
 
 def randomFasta(table, n):
     width = 60
-    r = xrange(width)
-    gR = Random.next
+    r = range(width)
+    gR = Random.__next__
     bb = bisect.bisect
     jn = ''.join
     probs, chars = makeCumulative(table)
-    for j in xrange(n // width):
-        print jn([chars[bb(probs, gR())] for i in r])
+    for j in range(n // width):
+        print(jn([chars[bb(probs, gR())] for i in r]))
     if n % width:
-        print jn([chars[bb(probs, gR())] for i in xrange(n % width)])
+        print(jn([chars[bb(probs, gR())] for i in range(n % width)]))
 
 
 n = int(sys.argv[1])
 
-print '>ONE Homo sapiens alu'
+print('>ONE Homo sapiens alu')
 repeatFasta(alu, n*2)
 
-print '>TWO IUB ambiguity codes'
+print('>TWO IUB ambiguity codes')
 randomFasta(iub, n*3)
 
-print '>THREE Homo sapiens frequency'
+print('>THREE Homo sapiens frequency')
 randomFasta(homosapiens, n*5)
